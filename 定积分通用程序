@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <stdlib.h>
+float Integral(float (*f)(float),float a,float b);
+float F1(float x)
+{
+    return 1+x*x;
+}
+int main()
+{
+   float y;
+   y=Integral(F1,0.0,1.0);
+   printf("y=%.3f\n",y);
+    return 0;
+}
+float Integral(float(*f)(float),float a,float b)
+{
+    int i,n=100;
+    float h=(b-a)/n,sum=((*f)(a)+(*f)(b))/2;
+    for (i=1;i<n;i++)
+    {
+        sum+=(*f)(a+i*h);
+    }
+    return sum*h;
+}
