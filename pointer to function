@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <stdlib.h>
+int Ascending(int a,int b);
+int Descending(int a, int b);
+void Paixu(int a[],int n,int index[],int (*compare)(int,int));
+int main()
+{
+    int a[10]={12,10,25,35,85,83,65,85,33,44},i,index[10];
+    Paixu(a,10,index,Ascending);
+    for (i=0;i<10;i++)
+        printf("%4d",a[index[i]]);
+    return 0;
+}
+void Paixu(int a[],int n,int index[],int (*compare)(int,int))
+{
+    int i,j,temp;
+    for (i=0;i<n;i++)
+        index[i]=i;
+    for (i=0;i<n-1;i++)
+    {
+        for (j=i+1;j<n;j++)
+        {
+            if ((*compare)(a[index[i]],a[index[j]]))
+            {
+                temp=a[index[i]];
+                a[index[i]]=a[index[j]];
+                a[index[j]]=temp;
+            }
+        }
+    }
+}
+int Ascending(int a,int b)
+{
+    return a>b;
+}
+int Descending(int a,int b)
+{
+    return a<b;
+}
